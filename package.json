@@ -1,7 +1,7 @@
 {
-  "name": "next-js-boilerplate",
+  "name": "goldtree-admin-panel",
   "version": "3.65.0",
-  "author": "Ixartz (https://github.com/ixartz)",
+  "author": "anjesh thapa",
   "engines": {
     "node": ">=20"
   },
