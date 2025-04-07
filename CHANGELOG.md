@@ -1,3 +1,10 @@
+# 1.0.0 (2025-04-07)
+
+
+### Features
+
+* **dashboard:** navbar data added ([4198ef5](https://github.com/GoldTree-IT/goldtree-backoffice/commit/4198ef5a3871d9540197ae247e8f4010f8e0e64d))
+
 # [3.65.0](https://github.com/ixartz/Next-js-Boilerplate/compare/v3.64.1...v3.65.0) (2025-03-24)
 
 
