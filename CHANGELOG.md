@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/GoldTree-IT/goldtree-backoffice/compare/v1.0.0...v1.1.0) (2025-05-13)
+
+
+### Features
+
+* **jobs:** integrated infinite scroll api ([#2](https://github.com/GoldTree-IT/goldtree-backoffice/issues/2)) ([b4c0242](https://github.com/GoldTree-IT/goldtree-backoffice/commit/b4c02421d6976abc0acbae19b25c647bcdc9fde2))
+
 # 1.0.0 (2025-04-07)
 
 
