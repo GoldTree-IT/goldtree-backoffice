@@ -1,173 +1,61 @@
 'use client';
 
 import { NavMain } from '@/components/nav-main';
-
 import { NavUser } from '@/components/nav-user';
-import { TeamSwitcher } from '@/components/team-switcher';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  SidebarSeparator,
 } from '@/components/ui/sidebar';
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from 'lucide-react';
-import * as React from 'react';
+import { sidebar } from '@/constants/sidebar.constant';
+import { usePathname } from 'next/navigation';
 
-// This is sample data.
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  teams: [
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
-    },
-    {
-      name: 'Evil Corp.',
-      logo: Command,
-      plan: 'Free',
-    },
-  ],
-  navMain: [
-    {
-      title: 'User Management',
-      url: '#',
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: 'Manage User Status',
-          url: '#',
-        },
-        {
-          title: 'Manage Roles',
-          url: '#',
-        },
-        {
-          title: 'Password and Security',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Job Listing Management',
-      url: '#',
-      icon: Bot,
-      items: [
-        {
-          title: 'Manage Job Status',
-          url: '#',
-        },
-        {
-          title: 'Manage Jobs',
-          url: '#',
-        },
-        {
-          title: 'Quantum',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Employee Management',
-      url: '#',
-      icon: BookOpen,
-      items: [
-        {
-          title: 'Introduction',
-          url: '#',
-        },
-        {
-          title: 'Get Started',
-          url: '#',
-        },
-        {
-          title: 'Tutorials',
-          url: '#',
-        },
-        {
-          title: 'Changelog',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Content Management',
-      url: '#',
-      icon: Settings2,
-      items: [
-        {
-          title: 'General',
-          url: '#',
-        },
-        {
-          title: 'Team',
-          url: '#',
-        },
-        {
-          title: 'Billing',
-          url: '#',
-        },
-        {
-          title: 'Limits',
-          url: '#',
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map,
-    },
-  ],
-};
+const { navMain, user } = sidebar;
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+
+  const itemsWithActiveState = navMain.map((item) => {
+    const isChildActive = item.children?.some(child => child.url === pathname);
+    const isActive = item.url === pathname || isChildActive;
+
+    const childrenWithActiveState = item.children?.map(child => ({
+      ...child,
+      isActive: child.url === pathname,
+    }));
+
+    return {
+      ...item,
+      isActive,
+      children: childrenWithActiveState,
+    };
+  });
+
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+      <SidebarHeader className="px-2 py-3">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-sm">
+            <span className="font-bold">GJ</span>
+          </div>
+          <div className="font-semibold">
+            <span className="text-amber-600">Gold</span>
+            <span>Job</span>
+          </div>
+        </div>
       </SidebarHeader>
+      <SidebarSeparator className="bg-amber-200/50" />
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={itemsWithActiveState} />
       </SidebarContent>
+      <SidebarSeparator className="bg-amber-200/50" />
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
-      <SidebarRail />
+      <SidebarRail className="hover:after:bg-amber-200" />
     </Sidebar>
   );
 }

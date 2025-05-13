@@ -1,7 +1,6 @@
 'use client';
 
 import type { LucideIcon } from 'lucide-react';
-
 import {
   Collapsible,
   CollapsibleContent,
@@ -17,25 +16,30 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
+import { cn } from '@/lib/utils';
 import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
+
+export type NavItem = {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  children?: {
+    title: string;
+    url: string;
+    isActive?: boolean;
+  }[];
+};
 
 export function NavMain({
   items,
 }: {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
+  items: NavItem[];
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel className="text-amber-600 font-medium">GoldJob</SidebarGroupLabel>
       <SidebarMenu>
         {items.map(item => (
           <Collapsible
@@ -46,20 +50,55 @@ export function NavMain({
           >
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={item.title}>
-                  {item.icon && <item.icon />}
+                <SidebarMenuButton
+                  className={cn(
+                    'data-[active=true]:bg-amber-50 data-[active=true]:text-amber-800',
+                    'data-[active=true]:dark:bg-amber-950/20 data-[active=true]:dark:text-amber-400',
+                    'data-[active=true]:before:absolute data-[active=true]:before:left-0 data-[active=true]:before:top-1/2',
+                    'data-[active=true]:before:h-5 data-[active=true]:before:w-1',
+                    'data-[active=true]:before:-translate-y-1/2 data-[active=true]:before:rounded-r-md',
+                    'data-[active=true]:before:bg-amber-500',
+                  )}
+                  data-active={item.isActive}
+                  tooltip={item.title}
+                >
+                  {item.icon && (
+                    <item.icon
+                      className={cn(
+                        'data-[active=true]:text-amber-600',
+                      )}
+                      data-active={item.isActive}
+                    />
+                  )}
                   <span>{item.title}</span>
-                  <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                  <ChevronRight
+                    className={cn(
+                      'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90',
+                      'data-[active=true]:text-amber-500',
+                    )}
+                    data-active={item.isActive}
+                  />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map(subItem => (
+                  {item.children?.map(subItem => (
                     <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
+                      <SidebarMenuSubButton
+                        asChild
+                        className={cn(
+                          'data-[active=true]:bg-amber-50 data-[active=true]:text-amber-800',
+                          'data-[active=true]:dark:bg-amber-950/20 data-[active=true]:dark:text-amber-400',
+                          'data-[active=true]:before:absolute data-[active=true]:before:left-0 data-[active=true]:before:top-1/2',
+                          'data-[active=true]:before:h-4 data-[active=true]:before:w-1',
+                          'data-[active=true]:before:-translate-y-1/2 data-[active=true]:before:rounded-r-md',
+                          'data-[active=true]:before:bg-amber-500',
+                        )}
+                        data-active={subItem.isActive}
+                      >
+                        <Link href={subItem.url}>
                           <span>{subItem.title}</span>
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}
