@@ -1,3 +1,5 @@
+import { AppSidebar } from '@/components/app-sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import './globals.css';
 
 export default async function RootLayout({
@@ -14,7 +16,13 @@ export default async function RootLayout({
         <title>Document</title>
       </head>
       <body>
-        {children}
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarInset>
+            {children}
+          </SidebarInset>
+        </SidebarProvider>
+
       </body>
     </html>
 
