@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const fetchJobListings = async ({ pageParam = null }) => {
   const params = new URLSearchParams();
-  params.set('limit', '2');
+  params.set('limit', '10');
 
   if (pageParam) {
     params.set('lastJobId', pageParam);
