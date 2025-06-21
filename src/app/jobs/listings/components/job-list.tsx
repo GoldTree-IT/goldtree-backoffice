@@ -1,30 +1,11 @@
 'use client';
 
+import type { JobListing, JobPage } from '../listings.types';
 import { Button } from '@/components/ui/button';
 import debounce from 'lodash.debounce';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { getStatusLabel } from '../listings.utils';
 import { useJobListings } from '../services/use-job-listings';
-
-type JobListing = {
-  _id: string;
-  job_title: string;
-  job_catagory: string;
-  company_name: string;
-  job_location: string;
-  salary: string;
-  skills: string[];
-  exp_required: string;
-  edu_preferences: string;
-  job_desc: string;
-  job_spec: string;
-  job_benifit: string;
-  status: 'live' | 'closed' | 'not_approved';
-};
-
-type JobPage = {
-  jobListings: JobListing[];
-};
 
 export const JobList = () => {
   const {
@@ -114,39 +95,33 @@ export const JobList = () => {
               </h3>
               <p className="text-sm text-gray-500">
                 {job.job_catagory}
-                {' '}
                 -
                 {job.company_name}
               </p>
               <p>
-                <strong>Location:</strong>
-                {' '}
+                <strong>Location: </strong>
                 {job.job_location}
               </p>
               <p>
-                <strong>Salary:</strong>
-                {' '}
+                <strong>Salary: </strong>
                 {job.salary}
               </p>
               <p>
-                <strong>Experience Required:</strong>
-                {' '}
+                <strong>Experience Required: </strong>
                 {job.exp_required}
               </p>
               <p>
-                <strong>Education Preference:</strong>
-                {' '}
+                <strong>Education Preference: </strong>
                 {job.edu_preferences}
               </p>
 
               <div className="mt-4">
                 <strong>Skills:</strong>
-                {' '}
                 {job.skills.join(', ')}
               </div>
 
               <div className="mt-4">
-                <strong>Job Description:</strong>
+                <strong>Job Description: </strong>
                 <div className="mt-2">
                   <p
                     className={`text-sm ${isDescriptionExpanded[job._id] ? '' : 'line-clamp-3'}`}

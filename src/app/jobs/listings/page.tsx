@@ -1,9 +1,8 @@
-import { Button } from '@/components/ui/button';
+import { getAppliedJobs } from '@/actions/applied-jobs';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -13,9 +12,12 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
-import { JobList } from './components/job-list';
 
-export default function JobsPage() {
+import { JobList } from './components/job-list';
+import { AppliedJobsList } from './components/jobs-applied';
+
+export default async function JobsPage() {
+  const jobsApplied = await getAppliedJobs();
   return (
     <main className="p-6 max-w-4xl">
       <Tabs defaultValue="all" className="w-full">
@@ -37,19 +39,7 @@ export default function JobsPage() {
         </TabsContent>
 
         <TabsContent value="applied">
-          <Card>
-            <CardHeader>
-              <CardTitle>Applied Jobs</CardTitle>
-              <CardDescription>Jobs you’ve applied to</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-
-              <p>No applied jobs found yet.</p>
-            </CardContent>
-            <CardFooter>
-              <Button variant="secondary">Update Preferences</Button>
-            </CardFooter>
-          </Card>
+          <AppliedJobsList jobs={jobsApplied?.data} />
         </TabsContent>
       </Tabs>
     </main>
