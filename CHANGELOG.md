@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/GoldTree-IT/goldtree-backoffice/compare/v1.1.0...v1.2.0) (2025-06-21)
+
+
+### Features
+
+* **app:** overall feature implementation ([#3](https://github.com/GoldTree-IT/goldtree-backoffice/issues/3)) ([e994c49](https://github.com/GoldTree-IT/goldtree-backoffice/commit/e994c49ed7aa792f3ddfb3333e49341b427d2e07))
+
 # [1.1.0](https://github.com/GoldTree-IT/goldtree-backoffice/compare/v1.0.0...v1.1.0) (2025-05-13)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "goldtree-admin-panel",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "anjesh thapa",
   "engines": {
     "node": ">=20"
